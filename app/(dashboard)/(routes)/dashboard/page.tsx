@@ -1,6 +1,10 @@
 import Image from "next/image";
 
 const DashboardPage = () => {
-  return <p>DashboardPage (protected)</p>;
+  return (
+    <div>
+      <p>DashboardPage (protected)</p>
+    </div>
+  );
 };
 export default DashboardPage;
