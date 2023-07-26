@@ -1,12 +1,17 @@
 "use client";
 
 import axios from "axios";
+import * as z from "zod";
+
 import { Heading } from "@/components/Heading";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { Empty } from "@/components/Empty";
+import { Loader } from "@/components/Loader";
+import { UserAvatar } from "@/components/UserAvatar";
+import { BotAvatar } from "@/components/BotAvatar";
 
-import * as z from "zod";
 import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +20,7 @@ import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
-import { Empty } from "@/components/Empty";
-import { Loader } from "@/components/Loader";
+
 import { cn } from "@/lib/utils";
 
 const ConversationPage = () => {
@@ -120,7 +124,8 @@ const ConversationPage = () => {
                     : "bg-muted"
                 )}
               >
-                {message.content}
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                <p className="text-sm">{message.content}</p>
               </div>
             ))}
           </div>
