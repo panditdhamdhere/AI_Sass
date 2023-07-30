@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
 
+import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit";
+
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -25,6 +27,8 @@ export async function POST(req: Request) {
     if (!messages) {
       return new NextResponse("Messages are required", { status: 400 });
     }
+
+    const freeTrial = 
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
