@@ -17,8 +17,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const VideoPage = () => {
+  const proModal = useProModal();
   const router = useRouter();
 
   const [video, setVideo] = useState<string>();
@@ -42,8 +44,9 @@ const VideoPage = () => {
 
       form.reset();
     } catch (error: any) {
-      // TO DO open pro model
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

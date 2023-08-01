@@ -1,11 +1,20 @@
 "use client";
 
-import { Code, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
+import {
+  Check,
+  Code,
+  ImageIcon,
+  MessageSquare,
+  Music,
+  VideoIcon,
+  Zap,
+} from "lucide-react";
 
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -13,6 +22,7 @@ import { useProModal } from "@/hooks/use-pro-modal";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const tools = [
   {
@@ -71,11 +81,19 @@ export const ProModal = () => {
                   <div className={cn("p-2 w-fit rounded-md", tool.bgColor)}>
                     <tool.icon className={cn("w-6 h-6", tool.color)} />
                   </div>
+                  <div className="font-semibold text-sm ">{tool.label}</div>
                 </div>
+                <Check className="text-primary w-5 h-5" />
               </Card>
             ))}
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <Button size="lg" variant="premium" className="w-full">
+            Upgrade
+            <Zap className="w-4 h-4 ml-2 fill-white" />
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
